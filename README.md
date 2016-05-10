@@ -6,7 +6,7 @@
 
 # What is it?
 
-TimeSeriesAwesomeStuff -> [InfluxDB](https://influxdata.com/)
+TimeSeriesAwesomeStuff -> [InfluxDB](https://influxdata.com/) and basically the legacy 0.8 line that is no longer supported. Currently we use this image in-house and there are no plans, to ever upgrade to 0.9 / 1.0+; for this you should use the [upcoming official influxdb image](https://github.com/docker-library/official-images/pull/1492) or for the time being [tutum/influxdb/](https://hub.docker.com/r/tutum/influxdb/).
 
 # How to use this image
 
@@ -15,10 +15,10 @@ TimeSeriesAwesomeStuff -> [InfluxDB](https://influxdata.com/)
 Starting an Influxdb instance is simple:
 
 ```console
-$ docker run --name some-influxdb -e INFLUXDB_DB_NAME=new-name -e INFLUXDB_DB_PASSWORD=my-secret -e INFLUXDB_DB_USER=my-user -d zalari/influxdb:tag
+$ docker run --name some-influxdb -d zalari/influxdb:tag
 ```
 
-... where `some-influxdb` is the name you want to assign to your container, `new-name` is the name of a new DB to be created, `my-user` is the username for an admin user for _this_ newly created DB and `my-secret` is the password for the admin user. The default admin / password is always: root:root.
+... where `some-influxdb` is the name you want to assign to your container. The default admin / password is always: root:root.
 
 ## Connect to InfluxDB from an application in another Docker container
 
@@ -41,22 +41,6 @@ The influxdb Server log is available through Docker's container log:
 ```console
 $ docker logs some-influxdb
 ```
-
-## Environment Variables
-
-When you start the `influxdb` image, you can adjust the configuration of the influxdb instance by passing one or more environment variables on the `docker run` command line.
-
-### `INFLUXDB_DB_NAME`
-
-Name of a new DB to be created on startup of the container.
-
-### `INFLUXDB_DB_USER`
-
-Username for a admin user for the above DB.
-
-### `INFLUXDB_DB_PASSWORD`
-
-Password for the admin user for the above DB.
 
 ## Where to Store Data
 
@@ -84,26 +68,6 @@ $ chcon -Rt svirt_sandbox_file_t /my/own/datadir
 
 # Supported Docker versions
 
-This image is officially supported on Docker version 1.10.3.
-
-Support for older versions (down to 1.6) is provided on a best-effort basis.
+This image is has been tested with Docker Engine 1.9+.
 
 Please see [the Docker installation documentation](https://docs.docker.com/installation/) for details on how to upgrade your Docker daemon.
-
-# User Feedback
-
-## Documentation
-
-Documentation for this image is stored in the [`influxdb/` directory](https://github.com/docker-library/docs/tree/master/influxdb) of the [`docker-library/docs` GitHub repo](https://github.com/docker-library/docs). Be sure to familiarize yourself with the [repository's `README.md` file](https://github.com/docker-library/docs/blob/master/README.md) before attempting a pull request.
-
-## Issues
-
-If you have any problems with or questions about this image, please contact us through a [GitHub issue](https://github.com/docker-library/influxdb/issues). If the issue is related to a CVE, please check for [a `cve-tracker` issue on the `official-images` repository first](https://github.com/docker-library/official-images/issues?q=label%3Acve-tracker).
-
-You can also reach many of the official image maintainers via the `#docker-library` IRC channel on [Freenode](https://freenode.net).
-
-## Contributing
-
-You are invited to contribute new features, fixes, or updates, large or small; we are always thrilled to receive pull requests, and do our best to process them as fast as we can.
-
-Before you start to code, we recommend discussing your plans through a [GitHub issue](https://github.com/docker-library/influxdb/issues), especially for more ambitious contributions. This gives other contributors a chance to point you in the right direction, give you feedback on your design, and help you find out if someone else is working on the same thing.
